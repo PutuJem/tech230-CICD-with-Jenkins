@@ -89,4 +89,4 @@ When tested code is ready, it can be deployed at any point through manual releas
 
 4. The build history should then update and trigger a test.
 
-![](images/pushevent.PNG)
+![](images/webhook-done.PNG)
