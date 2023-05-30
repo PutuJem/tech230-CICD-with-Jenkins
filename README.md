@@ -74,3 +74,15 @@ When tested code is ready, it can be deployed at any point through manual releas
 8. The `Console Output` should then display the following with all tests passed.
 
 ![](images/test.PNG)
+
+## **Configure the webhook integration between Jenkins and GitHub**
+
+1. Navigate to `settings` and `webhooks` within the GitHub repository and `add webhook`.
+
+2. Enter the payload URL in the format `http://<public-ipv4-address>:8080/github-webhook/` and select the content type as `application/json`.
+
+![](images/webhook-setup.PNG)
+
+3. No secret is required, select `just the push event` and `active` then proceed to `add webhook`
+
+![](images/pushevent.PNG)
