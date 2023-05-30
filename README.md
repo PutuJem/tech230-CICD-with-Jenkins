@@ -1,4 +1,4 @@
-## Jenkins and its stages
+## **Jenkins and its stages**
 
 Jenkins is an open source continuous integration/continuous delivery and deployment (CI/CD) automation software DevOps tool; It is used to implement CI/CD workflows, called pipelines.
 
@@ -8,11 +8,17 @@ A stage (or stage block) is a specific part of a task performed through the pipe
 
 ![](images/stages.PNG)
 
-## Jenkins Process Flow
+## **Jenkins Process Flow**
+
+The Jenkins process initally begins with all team members pushing tested code to a single repository; Continuous Integration is the practice of automating the integration of code continuously from all team members.
+
+Jenkins can be set up to automatically test code and transport it to the master node, if all test cases past; or else, they are given to the agent node for feedback and review to the relevant team members.
+
+When tested code is ready, it can be deployed at any point through manual releases; this is defined as Continuous Delivery. This step can also be automated to enable Continuous Deployment.
 
 ![](images/process.PNG)
 
-## Accessing a Jenkins server and checking its OS
+## **Accessing a Jenkins server and checking its OS**
 
 1. Navigate to a Jenkins server, typically available on port `8080` and login in with the suitable credentials.
 
