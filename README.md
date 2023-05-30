@@ -86,3 +86,7 @@ When tested code is ready, it can be deployed at any point through manual releas
 3. No secret is required, select `just the push event` and `active` then proceed to `add webhook`
 
 ![](images/pushevent.PNG)
+
+4. The build history should then update and trigger a test.
+
+![](images/pushevent.PNG)
