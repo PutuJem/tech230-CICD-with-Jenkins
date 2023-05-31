@@ -8,7 +8,7 @@ A stage (or stage block) is a specific part of a task performed through the pipe
 
 ![](images/stages.PNG)
 
-## **Jenkins Process Flow**
+## **Jenkins process flow**
 
 The Jenkins process initally begins with all team members pushing tested code to a single repository; Continuous Integration is the practice of automating the integration of code continuously from all team members.
 
