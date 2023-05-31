@@ -95,7 +95,7 @@ When tested code is ready, it can be deployed at any point through manual releas
 
 ## **Creating an automated Jenkins CI merge item**
 
-This section ties in a new branch `dev` to be merge to the `main` branch, when a new push is initiated.
+This section ties in a new branch called `dev` which is to be merged to the `main` branch in the GitHub repository when a `push` is initiated.
 
 1. First, create a new branch in the git repository and call it `dev`.
 
@@ -109,7 +109,7 @@ git checkout dev # Move to the branch.
 
 2. Create a new item in Jenkins called `name-ci-merge`.
 
-3. Configure your same GitHub repository firstly with HTTPS then with SSH for Source Code Management.
+3. Configure your same GitHub repository endpoints firstly with HTTPS then with SSH for Source Code Management.
 
 4. Specify the branch as the new branch `*/dev` and add the plugin (or behaviour) `Merge before build`, save the item; ensure that you are merging the branch to main as shown below.
 
@@ -128,7 +128,7 @@ git checkout dev # Move to the branch.
 ![](images/publisher.PNG)
 
 
-## **Configuring CD from Jenkins to AWS**
+## **Configuring continuous delivery between Jenkins and AWS**
 
 1. Create a new item called `name-cd` and configure it as usual with the github project and source code management, but this time with `*/main` as the branch to build.
 
@@ -150,8 +150,8 @@ EOF
 
 ![](images/cd-build.PNG)
 
-4. Add this job to trigger at the end of the merge build as a `post-build action`.
+4. Add this job to trigger at the end of the `<name>-merge-ci` build as a `post-build action`.
 
-5. To test CD is in operation, change the HTML file through the `dev` branch. Push this change to the GitHub repository and the pipeline build should trigger. Navigate to the web browser and enter the IPv4 address.
+5. To test continuous delivery is in operation, change the HTML file through the `dev` branch. Push this change to the GitHub repository and the pipeline build should trigger. Navigate to the web browser and enter the IPv4 address.
 
 ![](images/final.PNG)
