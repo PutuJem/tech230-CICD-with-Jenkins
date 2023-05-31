@@ -120,3 +120,6 @@ git checkout dev # Move to the branch.
 6. Add the CI merge item to the post-build actions if the tests pass to automate the trigger.
 
 ![](images/ci-post.PNG)
+
+## **Configuring CD from Jenkins to AWS**
+
