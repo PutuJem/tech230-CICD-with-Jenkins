@@ -90,3 +90,33 @@ When tested code is ready, it can be deployed at any point through manual releas
 4. The build history should then update and trigger a test.
 
 ![](images/webhook-done.PNG)
+
+## **Creating an automated Jenkins CI merge item**
+
+This section ties in a new branch `dev` to be merge to the `main` branch, when a new push is initiated.
+
+1. First, create a new branch in the git repository and call it `dev`.
+
+```bash
+git branch dev # Create a branch without moving to it.
+
+git checkout dev # Move to the branch.
+```
+
+> Note: the new branch may need to be initialised through pushing it to the github repo.
+
+2. Create a new item in Jenkins called `name-ci-merge`.
+
+3. Configure your same GitHub repository firstly with HTTPS then with SSH for Source Code Management.
+
+4. Specify the branch as the new branch `*/dev` and add the plugin (or behaviour) `Merge before build`, save the item; ensure that you are merging the branch to main as shown below.
+
+![](images/merge-scm.PNG)
+
+5. Return to the original CI item and change the branch specifier to `*/dev` as well.
+
+![](images/ci-dev.PNG)
+
+6. Add the CI merge item to the post-build actions if the tests pass to automate the trigger.
+
+![](images/ci-post.PNG)
