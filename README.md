@@ -122,4 +122,4 @@ git checkout dev # Move to the branch.
 ![](images/ci-post.PNG)
 
 ## **Configuring CD from Jenkins to AWS**
-
+s
