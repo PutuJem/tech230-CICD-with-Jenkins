@@ -57,9 +57,11 @@ When tested code is ready, it can be deployed at any point through manual releas
 
 4. Add the version control system using the github repository's SSH URL and credentials; Use the SSH username with private key option.
 
+>Note: Specify the branch as `*/main` for this example, however once a new branch is introduced (i.e. `*/dev`) revert to this.
+
 ![](images/ssh.PNG)
 
-5. Tick the `GitHub hook trigger for GITScm polling` option to trigger a build any time a change is made in the GitHub repository; the repository is also shown within the Jenkins `workspace` for the particular item.
+1. Tick the `GitHub hook trigger for GITScm polling` option to trigger a build any time a change is made in the GitHub repository; the repository is also shown within the Jenkins `workspace` for the particular item.
 
 ![](images/webhook.PNG)
 
@@ -130,9 +132,11 @@ git checkout dev # Move to the branch.
 
 1. Create a new item called `name-cd` and configure it as usual with the github project and source code management, but this time with `*/main` as the branch to build.
 
-2. Then provide the SSH agent PEM file to access AWS.
+2. Provide the SSH agent PEM file to access AWS.
 
-3. Include an execute shell to copy the over the github main 
+![](images/build-pem.PNG)
+
+3. Include an execute shell to copy the over the github `main` repository, connecting to the instance through ssh whilst removing the requirement to provide a key, execute the provision file and start the application.
 
 ```bash
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@<Public IPv4 DNS>:/home/ubuntu
@@ -143,3 +147,11 @@ ssh -o "StrictHostKeyChecking=no" ubuntu@<Public IPv4 DNS> <<EOF
 	pm2 start app.js
 EOF
 ```
+
+![](images/cd-build.PNG)
+
+4. Add this job to trigger at the end of the merge build as a `post-build action`.
+
+5. To test CD is in operation, change the HTML file through the `dev` branch. Push this change to the GitHub repository and the pipeline build should trigger. Navigate to the web browser and enter the IPv4 address.
+
+![](images/final.PNG)
