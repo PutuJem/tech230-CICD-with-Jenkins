@@ -121,5 +121,25 @@ git checkout dev # Move to the branch.
 
 ![](images/ci-post.PNG)
 
+7. Add the `post-build action` to push the changes made on the `dev` branch to the GitHub `main` repository.
+
+![](images/publisher.PNG)
+
+
 ## **Configuring CD from Jenkins to AWS**
-s
+
+1. Create a new item called `name-cd` and configure it as usual with the github project and source code management, but this time with `*/main` as the branch to build.
+
+2. Then provide the SSH agent PEM file to access AWS.
+
+3. Include an execute shell to copy the over the github main 
+
+```bash
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@<Public IPv4 DNS>:/home/ubuntu
+ssh -o "StrictHostKeyChecking=no" ubuntu@<Public IPv4 DNS> <<EOF
+	sudo bash ./app/app/provsion.sh
+	cd app/app/app
+	pm2 kill
+	pm2 start app.js
+EOF
+```
