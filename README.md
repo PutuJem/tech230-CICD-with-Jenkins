@@ -41,7 +41,7 @@ When tested code is ready, it can be deployed at any point through manual releas
 ![](images/console.PNG)
 
 
-## **Testing an application using Jenkins**
+## **Section 1: Testing an application using Jenkins**
 
 1. Follow steps 1 - 3 as shown above and have a GitHub repository ready with the application stored.
 
@@ -55,13 +55,13 @@ When tested code is ready, it can be deployed at any point through manual releas
 
 ![](images/restrict.PNG)
 
-4. Add the version control system using the github repository's SSH URL and credentials; Use the SSH username with private key option.
+4. Add the version control system using the github repository's SSH URL. Create a SSH key within the GitHub repository (`Settings` > `Deploy keys`) allowing read/write access and save it to the local `.ssh` folder. Use this SSH key as the `credentials` with the option SSH username with private key.
 
->Note: Specify the branch as `*/main` for this example, however once a new branch is introduced (i.e. `*/dev`) revert to this.
+>Note: Specify the branch as `*/main` for this example; this will need to be amended when a new branch is introduced (i.e. `*/dev`) in the latter example.
 
 ![](images/ssh.PNG)
 
-1. Tick the `GitHub hook trigger for GITScm polling` option to trigger a build any time a change is made in the GitHub repository; the repository is also shown within the Jenkins `workspace` for the particular item.
+5. Tick the `GitHub hook trigger for GITScm polling` option to trigger a build any time a change is made in the GitHub repository; the repository is also shown within the Jenkins `workspace` for the particular item.
 
 ![](images/webhook.PNG)
 
@@ -77,7 +77,7 @@ When tested code is ready, it can be deployed at any point through manual releas
 
 ![](images/test.PNG)
 
-## **Configure the webhook integration between Jenkins and GitHub**
+## **Section 2: Configure the webhook integration between Jenkins and GitHub**
 
 1. Navigate to `settings` and `webhooks` within the GitHub repository and `add webhook`.
 
@@ -85,7 +85,7 @@ When tested code is ready, it can be deployed at any point through manual releas
 
 ![](images/webhook-setup.PNG)
 
-3. No secret is required, select `just the push event` and `active` then proceed to `add webhook`
+3. No secret is required, select `just the push event` and `active` then proceed to `add webhook`.
 
 ![](images/pushevent.PNG)
 
@@ -93,7 +93,7 @@ When tested code is ready, it can be deployed at any point through manual releas
 
 ![](images/webhook-done.PNG)
 
-## **Creating an automated Jenkins CI merge item**
+## **Section 3: Creating an automated Jenkins CI merge item**
 
 This section ties in a new branch called `dev` which is to be merged to the `main` branch in the GitHub repository when a `push` is initiated.
 
@@ -109,7 +109,7 @@ git checkout dev # Move to the branch.
 
 2. Create a new item in Jenkins called `name-ci-merge`.
 
-3. Configure your same GitHub repository endpoints firstly with HTTPS then with SSH for Source Code Management.
+3. Configure your same GitHub repository endpoints firstly with HTTPS then with SSH for Source Code Management, as shown in section 1 steps 1 - 4.
 
 4. Specify the branch as the new branch `*/dev` and add the plugin (or behaviour) `Merge before build`, save the item; ensure that you are merging the branch to main as shown below.
 
@@ -128,9 +128,9 @@ git checkout dev # Move to the branch.
 ![](images/publisher.PNG)
 
 
-## **Configuring continuous delivery between Jenkins and AWS**
+## **Section 4: Configuring Continuous Delivery (CD) between Jenkins and AWS**
 
-1. Create a new item called `name-cd` and configure it as usual with the github project and source code management, but this time with `*/main` as the branch to build.
+1. Create a new item called `name-cd` and configure it as usual with the github project and source code management (as shown in section 1 steps 1 - 4), but this time with `*/main` as the branch to build.
 
 2. Provide the SSH agent PEM file to access AWS.
 
