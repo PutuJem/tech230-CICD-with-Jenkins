@@ -155,3 +155,6 @@ EOF
 5. To test continuous delivery is in operation, change the HTML file through the `dev` branch. Push this change to the GitHub repository and the pipeline build should trigger. Navigate to the web browser and enter the IPv4 address.
 
 ![](images/final.PNG)
+
+## **Section 5: Building a Jenkins server**
+
