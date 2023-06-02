@@ -158,15 +158,27 @@ EOF
 
 ## **Section 5: Building a Jenkins server**
 
-Create a new virtual machine through AWS EC2 instance
+1. Create a new virtual machine with AWS EC2 configured with ubuntu 18.04 LTS and a t2.micro. Additionally, set the inbound rules to allow SSH access from `my IP` as well as HTTP and custom TCP, jenkins port 8080, from anywhere. Launch this instance and when ready, SSH into it update the APT package manager.
 
 ```bash
 sudo apt-get update -y && sudo apt-get upgrade -y
+```
 
+2. Add the key to your system to use this repository.
+
+```bash
 curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+```
 
+3. Add a Jenkins apt repository entry.
+
+```bash
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+```
 
+4. Update your local package index then install Java and Jenkins. Finally, start Jenkins through the system process.
+
+```bash
 sudo apt-get update
 
 sudo apt-get install fontconfig openjdk-11-jre -y
@@ -174,6 +186,32 @@ sudo apt-get install fontconfig openjdk-11-jre -y
 sudo apt-get install jenkins
 
 sudo systemctl start jenkins
+```
 
+5. Access the interface of the automation server on the web browser through `http://<public-ip4-address>:8080/`. The user will be prompted to enter the admin password, which can be found in the `initialAdminPassword` file.
+
+```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
+
+6. Select what plugins are to be installed and tick the following.
+
+![](images/jenkins-install-plugins.PNG)
+
+![](images/jenkins-install-plugins-node.PNG)
+
+![](images/jenkins-install-plugins-ssh.PNG)
+
+![](images/jenkins-install-plugins-github.PNG)
+
+7. The user will now be presented with the updating page, which may take some time to complete. Further credential updates are required, including usernames and passwords to access the server.
+
+![](images/jenkins-install-plugins-update.PNG)
+
+8. Once within Jenkins, navigate to the `Dashboard`. On the side panel, select `Manage Jenkins` then `Security`. Configure the Git Host Key settings to `Accept first connection` for first key verification.
+
+![](images/jenkins-security-git.PNG)
+
+9. Also, within `Manage Jenkins` and under `Tools`, include the installation for version 12 for NodeJS.
+
+10. To test the automation server, follow sections 1 - 4 to setup a pipeline with a webhook to a GitHub repository and create a new app AMI instance.
