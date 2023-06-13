@@ -138,6 +138,8 @@ git checkout dev # Move to the branch.
 
 3. Include an execute shell to copy the over the github `main` repository, connecting to the instance through ssh whilst removing the requirement to provide a key, execute the provision file and start the application.
 
+> Note: If the application is not updating, this could be due to the user changing to the incorrect app directory.
+
 ```bash
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@<Public IPv4 DNS>:/home/ubuntu
 ssh -o "StrictHostKeyChecking=no" ubuntu@<Public IPv4 DNS> <<EOF
